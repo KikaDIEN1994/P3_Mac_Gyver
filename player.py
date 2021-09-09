@@ -14,13 +14,15 @@ class Player:
         self.direction = self.player
         self.maze = maze
 
-    """This method is use for move player in each direction"""
+    """This method is use for move player in each direction
+        and we add 1 condition for collision 
+    """
     def move(self, direction):
 
         if direction == "right":
             if self.case_x < (SPRITE_NUMBER - 1):
                 if self.maze.structure[self.case_y][self.case_x + 1] == "G":
-                    #print("gg")  # change all
+                    #print("gagner")  # change all
                     #pygame.quit()
                     pass
                 if self.maze.structure[self.case_y][self.case_x + 1] != "#":
