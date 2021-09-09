@@ -5,7 +5,7 @@ from item import Item
 
 """This class read and generate the labyrinth"""
 class Maze:
-    """Init file level.txt"""
+    """Init file level.txt and create an empty list items"""
     def __init__(self, file):
         self.file = "src/assets/level.txt"
         self.structure = 0
@@ -27,17 +27,14 @@ class Maze:
             random.shuffle(items_pos_available)
             i, j = items_pos_available.pop()
             self.items.append(Item(i,j,pygame.image.load(ITEM_0).convert()))
-            #print("Krusty est en x={}, y={}".format(i, j))
             i, j = items_pos_available.pop()
             self.items.append(Item(i,j,pygame.image.load(ITEM_1).convert()))
-            #print("Le donut est en x={}, y={}".format(i, j))
             i, j = items_pos_available.pop()
             self.items.append(Item(i,j,pygame.image.load(ITEM_2).convert()))
-            #print("la duff est en x={}, y={}".format(i, j))
 
     
     def display(self, window):
-    #From level.txt convert all fix charater to image (WALL,FLOOR,GUARDIAN) with constantes.py
+    #From level.txt convert all fix character to image (WALL,FLOOR,GUARDIAN) with constantes.py
             WALLS = pygame.image.load(WALL).convert()
             FLOORS = pygame.image.load(FLOOR).convert_alpha()
             GUARDIANS = pygame.image.load(GUARDIAN).convert()
@@ -60,15 +57,13 @@ class Maze:
                 if not item.is_item_drop():
                     window.blit(item.image ,(item.x*SPRITE_SIZE, item.y*SPRITE_SIZE))
 
-    #methode that check if item is drop and remove item 
+    #Methode that check if item is drop and remove item 
     def check_is_item_drop(self,homer_x,homer_y):
         for item in self.items:
-            #print(homer_x,homer_y,item.x*SPRITE_SIZE,item.y*SPRITE_SIZE)
             if item.x*SPRITE_SIZE == homer_x and item.y*SPRITE_SIZE == homer_y:
                 item.drop_item()
 
     #Counter of item if 3 item drop homer win if not lose
-    
     def is_all_item_drop(self):
         for item in self.items:
                 if not item.is_item_drop:
@@ -76,13 +71,3 @@ class Maze:
                     return False
         return True
         print("3 objets")
-    """
-    def is_all_item_drop(self,homer_x,homer_y):
-        for item in self.items:
-                if item.is_item_drop and homer_x == 896 and homer_y == 832:
-                    print("perdu")
-                    return False
-                if not item.is_item_drop and homer_x == 896 and homer_y == 832:
-                    print("gagner")
-                    return True
-    """
