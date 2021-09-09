@@ -59,8 +59,8 @@ while RUNNING:
             homer.move("right")
 
     maze.check_is_item_drop(homer.x,homer.y)
-    maze.is_all_item_drop(homer.x,homer.y)
     maze.display(window)
     homer_pos = window.blit(homer.direction, (homer.x, homer.y))
+    maze.is_all_item_drop()
     pygame.display.flip()
     

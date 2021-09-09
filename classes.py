@@ -68,6 +68,7 @@ class Maze:
                 item.drop_item()
 
     #Counter of item if 3 item drop homer win if not lose
+    
     def is_all_item_drop(self):
         for item in self.items:
                 if not item.is_item_drop:
@@ -75,8 +76,8 @@ class Maze:
                     return False
         return True
         print("3 objets")
-    
-    """def is_all_item_drop(self,homer_x,homer_y):
+    """
+    def is_all_item_drop(self,homer_x,homer_y):
         for item in self.items:
                 if item.is_item_drop and homer_x == 896 and homer_y == 832:
                     print("perdu")
@@ -84,4 +85,4 @@ class Maze:
                 if not item.is_item_drop and homer_x == 896 and homer_y == 832:
                     print("gagner")
                     return True
-"""
+    """
