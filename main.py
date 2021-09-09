@@ -8,7 +8,7 @@ from player import Player
 
 pygame.init()
 
-"""Display screen"""
+"""Display windows game"""
 window = pygame.display.set_mode((SIZE, SIZE))
 pygame.display.set_caption("Mac_Gyver")
 pygame.display.flip()
@@ -22,7 +22,7 @@ maze.display(window)
 homer = Player("src/assets/player.png", maze)
 RUNNING = True
 
-"""Beginning of game"""
+"""Beginning the game"""
 while RUNNING:
     window.fill((0,0,0))
     continuer_jeu = 1
@@ -42,25 +42,22 @@ while RUNNING:
                 continuer_jeu = 0
                 game = "src/assets/level.txt"
 
-    """Move player with keypad"""
+    """Move player with keypad and Player class"""
     if event.type == pygame.KEYDOWN:
 
         if event.key == pygame.K_DOWN:
-            #print("down")
             homer.move("down")
         if event.key == pygame.K_UP:
-            #print("up")
             homer.move("up")
         if event.key == pygame.K_LEFT:
-            #print("left")
             homer.move("left")
         if event.key == pygame.K_RIGHT:
-            #print("right")
             homer.move("right")
+
 
     maze.check_is_item_drop(homer.x,homer.y)
     maze.display(window)
     homer_pos = window.blit(homer.direction, (homer.x, homer.y))
     maze.is_all_item_drop()
     pygame.display.flip()
-    
+
