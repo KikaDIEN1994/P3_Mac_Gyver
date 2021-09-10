@@ -1,10 +1,10 @@
 from constantes import SPRITE_NUMBER, SPRITE_SIZE
 import pygame
-from classes import Maze
 
 
 class Player:
     """init player position and picture"""
+
     def __init__(self, player, maze):
         self.player = pygame.image.load("src/assets/img/player.png").convert_alpha()
         self.case_x = 0
@@ -15,15 +15,15 @@ class Player:
         self.maze = maze
 
     """This method is use for move player in each direction
-        and we add 1 condition for collision 
-    """
+        and we add 1 condition for collision """
+
     def move(self, direction):
 
         if direction == "right":
             if self.case_x < (SPRITE_NUMBER - 1):
                 if self.maze.structure[self.case_y][self.case_x + 1] == "G":
-                    #print("gagner")  # change all
-                    #pygame.quit()
+                    # print("gagner")  # change all
+                    # pygame.quit()
                     pass
                 if self.maze.structure[self.case_y][self.case_x + 1] != "#":
                     self.case_x += 1
