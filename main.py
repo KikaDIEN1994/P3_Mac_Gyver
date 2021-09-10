@@ -4,9 +4,12 @@ import pygame
 from constantes import SIZE
 from player import Player
 
-# from item import *
 
 pygame.init()
+
+font = pygame.font.Font(None, 72)
+WIN = font.render("YOU WIN", 1, (255, 255, 255))
+LOOSE = font.render("YOU LOOSE", 1, (255, 255, 255))
 
 """Display windows game"""
 window = pygame.display.set_mode((SIZE, SIZE))
@@ -24,23 +27,16 @@ RUNNING = True
 
 """Beginning the game"""
 while RUNNING:
-    window.fill((0,0,0))
-    continuer_jeu = 1
+    window.fill((0, 0, 0))
 
-    while continuer_jeu:
+    pygame.time.Clock().tick(15)
 
-        pygame.time.Clock().tick(30)
-
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                RUNNING = False
-                print("croix")
-                pygame.quit()
-                game = 0
-
-            else:
-                continuer_jeu = 0
-                game = "src/assets/level.txt"
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            RUNNING = False
+            print("croix")
+            pygame.quit()
+            exit()
 
     """Move player with keypad and Player class"""
     if event.type == pygame.KEYDOWN:
@@ -54,10 +50,18 @@ while RUNNING:
         if event.key == pygame.K_RIGHT:
             homer.move("right")
 
-
-    maze.check_is_item_drop(homer.x,homer.y)
+    maze.check_is_item_drop(homer.x, homer.y)
     maze.display(window)
     homer_pos = window.blit(homer.direction, (homer.x, homer.y))
-    maze.is_all_item_drop()
-    pygame.display.flip()
 
+    if maze.is_finished(homer.x, homer.y):
+        if maze.is_all_item_drop():
+            window.blit(WIN, (370, 400))
+        else:
+            window.blit(LOOSE, (370, 400))
+        pygame.display.flip()
+        pygame.time.delay(2000)
+        pygame.quit()
+        exit()
+
+    pygame.display.flip()
